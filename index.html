@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Ping Pong</title>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body { font: 13px Helvetica, Arial; }
+    </style>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      $(function () { // iife
+        const socket = io();
+        // outcoming
+        $('form.message').submit(function() { // fkn jquery
+          socket.emit('chat message', {id: msgCount, content: $('#m').val()});
+        });
+        // invoming
+        socket.on('admin message', function(msg){
+          $('#messages').append($('<li class="admin">').text(msg));
+        });
+      });
+    </script>
+  </head>
+  <body>
+    Content
+  </body>
+</html>
